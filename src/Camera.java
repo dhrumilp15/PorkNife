@@ -4,8 +4,8 @@ import java.awt.event.KeyListener;
 public class Camera implements KeyListener {
     public double xPos, yPos, xDir, yDir,xPlane, yPlane;
     public boolean left,right,forward, back;
-    public final double MOVE_SPEED = 0.2;
-    public final double ROTATION_SPEED = 0.05;
+    public final double MOVE_SPEED = 0.08; // anything more than .2 is jarring
+    public final double ROTATION_SPEED = 0.045;
 
     public Camera(double x, double y, double xd, double yd, double xp, double yp) {
         xPos = x;
@@ -17,24 +17,23 @@ public class Camera implements KeyListener {
     }
 
     public void keyPressed(KeyEvent key) {
-        if (key.getKeyCode() == KeyEvent.VK_LEFT)
+        if (key.getKeyCode() == KeyEvent.VK_LEFT || key.getKeyChar() == 'A' || key.getKeyChar() == 'a')
             left=true;
-        if (key.getKeyCode() == KeyEvent.VK_RIGHT)
+        if (key.getKeyCode() == KeyEvent.VK_RIGHT || key.getKeyChar() == 'D' || key.getKeyChar() == 'd')
             right=true;
-        if (key.getKeyCode() == KeyEvent.VK_UP)
+        if (key.getKeyCode() == KeyEvent.VK_UP || key.getKeyChar() == 'W' || key.getKeyChar() == 'w')
             forward=true;
-        if (key.getKeyCode() == KeyEvent.VK_DOWN)
+        if (key.getKeyCode() == KeyEvent.VK_DOWN || key.getKeyChar() == 'S' || key.getKeyChar() == 's')
             back=true;
     }
-
     public void keyReleased(KeyEvent key) {
-        if((key.getKeyCode() == KeyEvent.VK_LEFT))
+        if (key.getKeyCode() == KeyEvent.VK_LEFT || key.getKeyChar() == 'A' || key.getKeyChar() == 'a')
             left = false;
-        if((key.getKeyCode() == KeyEvent.VK_RIGHT))
+        if (key.getKeyCode() == KeyEvent.VK_RIGHT || key.getKeyChar() == 'D' || key.getKeyChar() == 'd')
             right = false;
-        if((key.getKeyCode() == KeyEvent.VK_UP))
+        if (key.getKeyCode() == KeyEvent.VK_UP || key.getKeyChar() == 'W' || key.getKeyChar() == 'w')
             forward = false;
-        if((key.getKeyCode() == KeyEvent.VK_DOWN))
+        if (key.getKeyCode() == KeyEvent.VK_DOWN || key.getKeyChar() == 'S' || key.getKeyChar() == 's')
             back = false;
     }
     public void keyTyped(KeyEvent key) {}
@@ -47,9 +46,9 @@ public class Camera implements KeyListener {
                 yPos += yDir * MOVE_SPEED;
         }
         if (back) {
-            if (map[(int)(xPos + xDir * MOVE_SPEED)][(int)yPos] == 0)
+            if (map[(int)(xPos - xDir * MOVE_SPEED)][(int)yPos] == 0)
                 xPos -= xDir * MOVE_SPEED;
-            if (map[(int)(xPos)][(int)(yPos + yDir * MOVE_SPEED)] == 0)
+            if (map[(int)(xPos)][(int)(yPos - yDir * MOVE_SPEED)] == 0)
                 yPos -= yDir * MOVE_SPEED;
         }
         if(right) {
@@ -68,7 +67,5 @@ public class Camera implements KeyListener {
             xPlane=xPlane*Math.cos(ROTATION_SPEED) - yPlane*Math.sin(ROTATION_SPEED);
             yPlane=oldxPlane*Math.sin(ROTATION_SPEED) + yPlane*Math.cos(ROTATION_SPEED);
         }
-
-
     }
 }
