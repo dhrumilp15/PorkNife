@@ -1,5 +1,3 @@
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.awt.Color;
 
@@ -18,14 +16,17 @@ public class Screen {
     }
 
     public int[] update(Camera camera, int[] pixels) {
-        for (int n = 0; n < pixels.length / 2; n++) {
-            if (pixels[n] != Color.DARK_GRAY.getRGB()) pixels[n] = Color.DARK_GRAY.getRGB();
-        }
-        for (int i = pixels.length / 2; i < pixels.length; i++) {
-            if (pixels[i] != Color.gray.getRGB()) pixels[i] = Color.gray.getRGB();
-        }
-        for (int x = 0; x < width; x = x + 1) {
-            double cameraX = 2 * x / (double) (width) - 1;
+        // Ceiling
+        for (int n = 0; n < pixels.length / 2; n++)
+            if (pixels[n] != (new Color(135,206,235)).getRGB())
+                pixels[n] = (new Color(135,206,235)).getRGB();
+        //Floor
+        for (int i = pixels.length / 2; i < pixels.length; i++)
+            if (pixels[i] != Color.gray.getRGB())
+                pixels[i] = Color.gray.getRGB();
+
+        for (int x = 0; x < width; x++) {
+            double cameraX = 2.0 * x / (double) (width) - 1.0;
             double rayDirX = camera.xDir + camera.xPlane * cameraX;
             double rayDirY = camera.yDir + camera.yPlane * cameraX;
             //Map position
@@ -95,16 +96,14 @@ public class Screen {
             //add a texture
             int texNum = map[mapX][mapY] - 1;
             double wallX;//Exact position of where wall was hit
-            if (side == 1) {//If its a y-axis wall
+            if (side == 1) //If its a y-axis wall
                 wallX = (camera.xPos + ((mapY - camera.yPos + (1 - stepY) / 2.0) / rayDirY) * rayDirX);
-            } else {//X-axis wall
+            else //X-axis wall
                 wallX = (camera.yPos + ((mapX - camera.xPos + (1 - stepX) / 2.0) / rayDirX) * rayDirY);
-            }
             wallX -= Math.floor(wallX);
             //x coordinate on the texture
             int texX = (int) (wallX * (textures.get(texNum).SIZE));
-            if (side == 0 && rayDirX > 0) texX = textures.get(texNum).SIZE - texX - 1;
-            if (side == 1 && rayDirY < 0) texX = textures.get(texNum).SIZE - texX - 1;
+            if ((side == 0 && rayDirX > 0) || (side == 1 && rayDirY < 0)) texX = textures.get(texNum).SIZE - texX - 1;
 
             //calculate y coordinate on texture
             for (int y = drawStart; y < drawEnd; y++) {
