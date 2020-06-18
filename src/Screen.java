@@ -2,15 +2,13 @@ import java.util.ArrayList;
 import java.awt.Color;
 
 public class Screen {
-    public int[][] map;
-    public int mapWidth, mapHeight, width, height;
+    public Map map;
+    public int width, height;
     public ArrayList<Texture> textures;
 
-    public Screen(int[][] m, int mapW, int mapH, ArrayList<Texture> tex, int w, int h) {
+    public Screen(Map m, ArrayList<Texture> tex, int w, int h) {
         map = m;
         textures = tex;
-        mapWidth = mapW;
-        mapHeight = mapH;
         width = w;
         height = h;
     }
@@ -26,24 +24,29 @@ public class Screen {
                 pixels[i] = Color.gray.getRGB();
 
         for (int x = 0; x < width; x++) {
-            double cameraX = 2.0 * x / (double) (width) - 1.0;
+            double cameraX = 2.0 * x / (double) (width) - 1.0; // normalized x-value of a vertical sliver of the screen
+
+            // Calculate ray DIRECTION for vertical sliver --> not the length of the ray!
             double rayDirX = camera.xDir + camera.xPlane * cameraX;
             double rayDirY = camera.yDir + camera.yPlane * cameraX;
+
             //Map position
             int mapX = (int) camera.xPos;
             int mapY = (int) camera.yPos;
+
             //length of ray from current position to next x or y-side
             double sideDistX;
             double sideDistY;
-            //Length of ray from one side to next in map
+
+            //Unit distance for each direction based on ray vector
             double deltaDistX = Math.sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
             double deltaDistY = Math.sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
             double perpWallDist;
+
             //Direction to go in x and y
             int stepX, stepY;
             boolean hit = false;//was a wall hit
             int side = 0;//was the wall vertical or horizontal
-
             //Figure out the step direction and initial distance to a side
             if (rayDirX < 0) {
                 stepX = -1;
@@ -73,7 +76,7 @@ public class Screen {
                     side = 1;
                 }
                 //Check if ray has hit a wall
-                if (map[mapX][mapY] > 0) hit = true;
+                if (map.at(mapX, mapY) > 0) hit = true;
             }
 
             //Calculate distance to the point of impact
@@ -94,7 +97,7 @@ public class Screen {
                 drawEnd = height - 1;
 
             //add a texture
-            int texNum = map[mapX][mapY] - 1;
+            int texNum = map.at(mapX, mapY) - 1;
             double wallX;//Exact position of where wall was hit
             if (side == 1) //If its a y-axis wall
                 wallX = (camera.xPos + ((mapY - camera.yPos + (1 - stepY) / 2.0) / rayDirY) * rayDirX);
