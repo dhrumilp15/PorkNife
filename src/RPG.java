@@ -17,7 +17,7 @@ public class RPG extends JFrame implements Runnable {
     public Map map;
 
     public RPG() {
-        map = new Map(20);
+        map = new Map();
         thread = new Thread(this);
         image = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -27,6 +27,7 @@ public class RPG extends JFrame implements Runnable {
         textures.add(Texture.brick);
         textures.add(Texture.bluestone);
         textures.add(Texture.stone);
+        textures.add(Texture.green);
 
         camera = new Camera(map.startx + 0.5, map.starty + 0.5,1,0,0,-0.66);
 
