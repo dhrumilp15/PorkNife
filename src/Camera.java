@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 public class Camera implements KeyListener {
     public double xPos, yPos, xDir, yDir,xPlane, yPlane;
     public boolean left,right,forward, back;
-    public final double MOVE_SPEED = 0.07; // anything more than .2 is jarring
+    public final double MOVE_SPEED = 0.08; // anything more than .2 is jarring
     public final double ROTATION_SPEED = 0.045; // rotates by this angle (radians) each update
 
     public Camera(double x, double y, double xd, double yd, double xp, double yp) {

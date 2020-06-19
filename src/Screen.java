@@ -63,6 +63,7 @@ public class Screen {
                 sideDistY = (mapY + 1.0 - camera.yPos) * deltaDistY;
             }
 
+
             //Loop to find where the ray hits a wall
             while (!hit) {
                 //Jump to next square
@@ -75,6 +76,7 @@ public class Screen {
                     mapY += stepY;
                     side = 1;
                 }
+//                System.out.println("mapX: " + mapX + " mapY: " + mapY);
                 //Check if ray has hit a wall
                 if (map.at(mapX, mapY) > 0) hit = true;
             }
