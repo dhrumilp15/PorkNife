@@ -48,9 +48,7 @@ public class Map {
      * @param jindex column
      * @return value at row, column
      */
-    public int at(int index, int jindex) {
-        return map[index][jindex];
-    }
+    public int at(int index, int jindex) {return map[index][jindex];}
 
     /**
      * Populates the map array, implementing:
@@ -106,7 +104,7 @@ public class Map {
         // Force a path between top left corner and bottom right corner
         int[] pos = {1,1};
         map[pos[0]][pos[1]] = 0;
-        while (pos[0] < len-2 && pos[1] < len-2) {
+        while (pos[0] < len-2 && pos[1] < len-2) { // don't get too close to the wall
             int choice = (int) (Math.random() * 2);
             if (choice == 0) {
                 map[pos[0] + 1][pos[1]] = 0;

@@ -30,8 +30,6 @@ public class RPG extends JFrame implements Runnable {
         textures.add(Texture.green);
 
         camera = new Camera(map.startx + 0.5, map.starty + 0.5,1,0,0,-0.66);
-
-
         screen = new Screen(map, textures, 640, 480);
         addKeyListener(camera);
         setSize(640, 480);
