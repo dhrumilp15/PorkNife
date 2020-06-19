@@ -52,6 +52,7 @@ public class Camera implements KeyListener {
                 yPos -= yDir * MOVE_SPEED;
         }
         if(right) {
+//            System.out.println(xPlane);
             double oldxDir=xDir;
             xDir = xDir * Math.cos(-ROTATION_SPEED) - yDir*Math.sin(-ROTATION_SPEED);
             yDir=oldxDir * Math.sin(-ROTATION_SPEED) + yDir * Math.cos(-ROTATION_SPEED);
@@ -60,6 +61,7 @@ public class Camera implements KeyListener {
             yPlane=oldxPlane*Math.sin(-ROTATION_SPEED) + yPlane*Math.cos(-ROTATION_SPEED);
         }
         if(left) {
+//            System.out.println(xPlane);
             double oldxDir=xDir;
             xDir=xDir*Math.cos(ROTATION_SPEED) - yDir*Math.sin(ROTATION_SPEED);
             yDir=oldxDir*Math.sin(ROTATION_SPEED) + yDir*Math.cos(ROTATION_SPEED);
