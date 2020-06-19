@@ -73,7 +73,7 @@ public class Map {
             }
         }
 
-        for (int i = len - 3; i < len; i++) {
+      for (int i = len - 3; i < len; i++) {
             for (int j = len - 3; j < len; j++) {
                 if (i == len - 1 || j == len - 1)
                     map[i][j] = 5;
