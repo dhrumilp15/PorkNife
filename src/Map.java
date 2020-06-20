@@ -125,8 +125,5 @@ public class Map {
                 }
             }
         }
-//        for (int[] list : map) {
-//            System.out.println(Arrays.toString(list));
-//        }
     }
 }

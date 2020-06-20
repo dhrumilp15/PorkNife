@@ -9,6 +9,13 @@ import java.util.concurrent.Flow;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.util.ArrayList;
+import javax.swing.JFrame;
 
 public class RPG extends JFrame implements Runnable {
     public ArrayList<Texture> textures;
@@ -38,8 +45,8 @@ public class RPG extends JFrame implements Runnable {
         camera = new Camera(map.startx + 0.5, map.starty + 0.5,1,0,0,-0.66);
         screen = new Screen(map, textures, 640, 480);
         miniMap = new MiniMap(camera,map);
-        addKeyListener(camera);
 
+        addKeyListener(camera);
         setSize(640, 480);
         setResizable(false);
         setTitle("PorkNife");
@@ -56,6 +63,7 @@ public class RPG extends JFrame implements Runnable {
     }
 
     public synchronized void stop() {
+        running = false;
         try {
             thread.join();
         } catch(InterruptedException e) {
