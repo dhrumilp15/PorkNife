@@ -6,4 +6,4 @@ Epic Doom-style 3D Maze solving
 Thanks to the electric sheep for help with implementing the raycasting engine
 
 
-![The Goal blocks](https://github.com/dhrumilp15/PorkNife/blob/master/endscreen.jpg?raw=true)
+![The Goal blocks](https://github.com/dhrumilp15/PorkNife/blob/master/docs/EndScreen.jpg?raw=true)
