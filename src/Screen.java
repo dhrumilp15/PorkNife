@@ -96,8 +96,7 @@ public class Screen {
                     side = 1;
                 }
 //                System.out.println("mapX: " + mapX + " mapY: " + mapY);
-                //Check if ray has hit a wall
-                if (map.at(mapX, mapY) > 0) hit = true;
+                //Check if ray has hit a wall                if (map.at(mapX, mapY) > 0) hit = true;
             }
 
             //Calculate distance to the point of impact
