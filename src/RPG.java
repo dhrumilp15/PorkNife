@@ -1,22 +1,17 @@
-import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.Flow;
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 
+/**
+ * Main Game Code
+ */
 public class RPG extends JFrame implements Runnable {
     public ArrayList<Texture> textures;
     private Thread thread;
@@ -29,6 +24,9 @@ public class RPG extends JFrame implements Runnable {
     public MiniMap miniMap;
     public int mapSize = 160;
 
+    /**
+     * Creates an RPG object
+     */
     public RPG() {
         map = new Map();
         thread = new Thread(this);
@@ -57,11 +55,17 @@ public class RPG extends JFrame implements Runnable {
         start();
     }
 
+    /**
+     * Executed as soon as the game is created
+     */
     private synchronized void start() {
         running = true;
         thread.start();
     }
 
+    /**
+     * To end the game, join thread
+     */
     public synchronized void stop() {
         running = false;
         try {
@@ -71,6 +75,13 @@ public class RPG extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * To show image to the screen
+     *
+     * Also shows minimap
+     * Instructional Text
+     * @param fp The filepath of an image to show (endscreen)
+     */
     public void render(String fp) {
         BufferStrategy bs = getBufferStrategy();
         if(bs == null) {
@@ -93,6 +104,10 @@ public class RPG extends JFrame implements Runnable {
         bs.show();
     }
 
+    /**
+     * Executed directly after thread.start()
+     * Main Game Loop
+     */
     public void run() {
         // This executes directly after `thread.start()`
         long lastTime = System.nanoTime();
@@ -119,6 +134,12 @@ public class RPG extends JFrame implements Runnable {
         }
         stop();
     }
+
+    /**
+     * Main Program Loop
+     *
+     * @param args No args needed
+     */
     public static void main(String[] args) {
         RPG main = new RPG();
     }

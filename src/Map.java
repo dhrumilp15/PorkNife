@@ -1,6 +1,8 @@
 import java.lang.Math;
-import java.util.Arrays;
 
+/**
+ * To implement random map generation and Map utilities
+ */
 public class Map {
     private int len = 16;
     public int[][] map;
@@ -8,7 +10,7 @@ public class Map {
     public int starty = 0;
 
     /**
-     * Creates a Map object with a default length of 15
+     * Creates a Map object with the default length
      */
     public Map() {
         map = new int[len][len];

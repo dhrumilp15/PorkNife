@@ -1,11 +1,21 @@
 import java.util.ArrayList;
 import java.awt.Color;
 
+/**
+ * Main renderer for raycasting engine
+ */
 public class Screen {
     public Map map;
     public int width, height;
     public ArrayList<Texture> textures;
 
+    /**
+     * Creates a Screen object
+     * @param m The Map object
+     * @param tex The Texture arraylist
+     * @param w The width of the window
+     * @param h The height of the window
+     */
     public Screen(Map m, ArrayList<Texture> tex, int w, int h) {
         map = m;
         textures = tex;
@@ -13,8 +23,17 @@ public class Screen {
         height = h;
     }
 
+    /**
+     * Updates the screen based on camera position
+     * Uses raycasting to solve for which pixels in the screen should represent a wall.
+     * Distance to the object isn't necessarily used since we assume a light source that doesn't change with distance...
+     * Lighting and shadows may come later... (There is some lighting with vertical walls to make them darker)
+     * @param camera The Camera object
+     * @param pixels The pixel array to change
+     * @return The new pixel array
+     */
     public int[] update(Camera camera, int[] pixels) {
-        // Ceiling
+        // sky
         for (int n = 0; n < pixels.length / 2; n++)
             if (pixels[n] != (new Color(135,206,235)).getRGB())
                 pixels[n] = (new Color(135,206,235)).getRGB();

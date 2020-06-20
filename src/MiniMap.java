@@ -1,8 +1,9 @@
-import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
-public class MiniMap extends JFrame{
+/**
+ * Handles drawing and updating the minimap
+ */
+public class MiniMap{
     public static int[][] minimap;
     public Map map;
     public Camera camera;
@@ -10,6 +11,11 @@ public class MiniMap extends JFrame{
     private int offsetX = 10;
     private int offsetY = 10;
 
+    /**
+     * Creates MiniMap object
+     * @param camera The Camera object
+     * @param map The Map object
+     */
     public MiniMap(Camera camera, Map map) {
         minimap = new int[map.getLen()][map.getLen()];
         this.map = map;
@@ -24,7 +30,7 @@ public class MiniMap extends JFrame{
     /**
      * Update the minimap to store saved values
      *
-     * Since game fps is 60, we assume that we will not "skip" squares
+     * Players can typically see one square around them at least
      * @param camera The Camera object to store current position
      */
     public void update(Camera camera) {
@@ -66,13 +72,5 @@ public class MiniMap extends JFrame{
             }
         }
     }
-
-    /**
-     * Getter for two-index access
-     * @param index row
-     * @param jindex column
-     * @return value at row, column
-     */
-    public int at(int index, int jindex) {return minimap[index][jindex];}
 
 }
