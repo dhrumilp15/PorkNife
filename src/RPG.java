@@ -97,7 +97,7 @@ public class RPG extends JFrame implements Runnable {
         }
         else {
             BufferedImage img = null;
-            try { img = ImageIO.read(new File(fp));}
+            try { img = ImageIO.read(this.getClass().getResource(fp));}
             catch (IOException e) { e.printStackTrace();}
             g.drawImage(img, 0, 0, image.getWidth(), image.getHeight(), null);
         }
@@ -126,7 +126,7 @@ public class RPG extends JFrame implements Runnable {
                 miniMap.update(camera);
                 if ((int)camera.xPos == map.getLen() - 2 && (int)camera.yPos == map.getLen() - 2) {
                     running = false;
-                    render("res/squid.png");
+                    render("squid.png");
                 }
                 delta--;
             }
