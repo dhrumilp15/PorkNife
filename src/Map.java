@@ -1,6 +1,8 @@
 import java.lang.Math;
-import java.util.Arrays;
 
+/**
+ * To implement random map generation and Map utilities
+ */
 public class Map {
     private int len = 16;
     public int[][] map;
@@ -8,7 +10,7 @@ public class Map {
     public int starty = 0;
 
     /**
-     * Creates a Map object with a default length of 15
+     * Creates a Map object with the default length
      */
     public Map() {
         map = new int[len][len];
@@ -104,18 +106,26 @@ public class Map {
         // Force a path between top left corner and bottom right corner
         int[] pos = {1,1};
         map[pos[0]][pos[1]] = 0;
-        while (pos[0] < len-2 && pos[1] < len-2) { // don't get too close to the wall
+        while (pos[0] < len-1 && pos[1] < len-1) { // don't get too close to the wall
             int choice = (int) (Math.random() * 2);
-            if (choice == 0) {
-                map[pos[0] + 1][pos[1]] = 0;
-                pos[0] += 1;
-            } else if (choice == 1) {
-                map[pos[0]][pos[1]+1] = 0;
-                pos[1] += 1;
+            if (pos[0] == len-2) {
+                for (int j = pos[1]; j < len - 2; j++)
+                    map[pos[0]][j] = 0;
+                break;
+            }
+            else if (pos[1] == len-2) {
+                for (int i = pos[0]; i < len - 2; i++)
+                    map[i][pos[1]] = 0;
+                break;
+            } else {
+                if (choice == 0) {
+                    map[pos[0] + 1][pos[1]] = 0;
+                    pos[0] += 1;
+                } else {
+                    map[pos[0]][pos[1] + 1] = 0;
+                    pos[1] += 1;
+                }
             }
         }
-//        for (int[] list : map) {
-//            System.out.println(Arrays.toString(list));
-//        }
     }
 }
