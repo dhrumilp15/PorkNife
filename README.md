@@ -6,4 +6,4 @@ Epic Doom-style 3D Maze solving
 Thanks to thesheepelectric for the basic raycasting engine
 
 
-![Gameplay Demo](https://github.com/dhrumilp15/PorkNife/blob/master/docs/Porknife_demo_small.gif?raw=true)
+![Gameplay Demo](docs/Porknife_demo_small.gif)
